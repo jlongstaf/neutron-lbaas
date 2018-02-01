@@ -14,18 +14,24 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from tempest import config
 from tempest.lib.common.utils import data_utils
 from tempest.lib.common.utils import test_utils
+from tempest.lib import decorators
 from tempest.lib import exceptions as ex
 from tempest import test
 
 from neutron_lbaas.tests.tempest.v2.api import base
 
+"""F5 LBaaS driver does not support these tests.
 
-CONF = config.CONF
+The driver requires network shared set True before it will create load
+balancers for multiple tenants. All tests in this module will fail
+as create_network() does not create a shared network, and all tests rely on
+creating load balancers for two different tenants.
+"""
 
 
+@decorators.skip_because("Not supported.")
 class LoadBalancersTestAdmin(base.BaseAdminTestCase):
 
     """
